@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5432/postgres'
+    username: 'admin'
+    password: 'password'
+
+services:
+  email:
+    base-url: 'https://api.supermail123.com'
