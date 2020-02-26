@@ -1,0 +1,12 @@
+# To spin up the required services for this application, simply run `docker-compose up`
+
+version: '2'
+
+services:
+
+  # This ActiveMQ container uses the (default) admin:admin credentials
+  activemq:
+    image: 'rmohr/activemq'
+    ports:
+      - '8161:8161'
+      - '61616:61616'
