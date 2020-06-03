@@ -1,0 +1,6 @@
+auth:
+  basic:
+    username: 'webmaster'
+    password: 'pass123'
+  jwt:
+    hmacKey: 'secret'

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker exec -it combining-spring-boot-auth-methods_redis_1 redis-cli
