@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { IntlProvider } from 'react-intl';
+import { FormattedMessage, IntlProvider } from 'react-intl';
 import './App.css';
-import Greeting from './Greeting';
 import { loadTranslation } from './i18n';
-import logo from './logo.svg';
+import { TranslationKey } from './i18n/TranslationKey';
 
 class App extends Component {
 
   state = {
-    locale: 'en-US',
+    locale: undefined,
     translation: undefined,
-  };
+  }
 
   flushLocale = async (locale: string) => {
     const translation = await loadTranslation(locale);
@@ -18,23 +17,22 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { locale } = this.state;
-    this.flushLocale(locale);
+    const defaultLocale = 'en';
+    this.flushLocale(defaultLocale);
   }
 
   render() {
     const { locale, translation } = this.state;
-    if (!translation) {
+    if (!locale || !translation) {
       return <div>Loading...</div>;
     }
     return (
-      <IntlProvider locale={locale} messages={translation}>
+      <IntlProvider locale={locale!} messages={translation}>
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <Greeting />
-            <button onClick={() => this.flushLocale('en-US')}>English</button>
-            <button onClick={() => this.flushLocale('es-ES')}>Spanish</button>
+            <button onClick={() => this.flushLocale('en')}>English</button>
+            <button onClick={() => this.flushLocale('es')}>Spanish</button>
+            <FormattedMessage id={TranslationKey.websiteGreeting} />
           </header>
         </div>
       </IntlProvider>

@@ -1,9 +1,9 @@
-export function loadTranslation(locale: string): Promise<Record<string, string>> {
-  if (locale === 'en-US') {
-    return import('./enUS').then(module => module.default);
+export function loadTranslation(locale: string) {
+  if (locale === 'en') {
+    return import('./en').then(module => module.translation);
   }
-  if (locale === 'es-ES') {
-    return import('./esES').then(module => module.default);
+  if (locale === 'es') {
+    return import('./es').then(module => module.translation);
   }
   throw new Error('Translation not found');
 }

@@ -1,3 +1,3 @@
 export enum TranslationKey {
-  greeting = 'greeting',
+  websiteGreeting = 'websiteGreeting',
 }
