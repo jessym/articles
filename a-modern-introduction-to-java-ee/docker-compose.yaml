@@ -1,0 +1,14 @@
+# This file provides an easy way to spin up the required services for this application by running `docker-compose up`
+
+version: '2'
+
+services:
+
+  postgres:
+    image: 'postgres:12.1'
+    environment:
+      - 'POSTGRES_USER=admin'
+      - 'POSTGRES_PASSWORD=password'
+      - 'POSTGRES_DB=postgres'
+    ports:
+      - '5432:5432'
