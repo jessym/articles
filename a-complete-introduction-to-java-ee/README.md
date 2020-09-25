@@ -96,14 +96,14 @@ Recommended EJB Scopes (automatically part of Wildfly's container-wide transacti
  2. Create a [docker-compose.yaml](docker-compose.yaml) file at the root of your project
  3. Run `docker-compose up` from the root of your project to create and start a new Postgres instance with the configured credentials
 
-## Registering PostgreSQL as a Module and Data Source
+## Registering PostgreSQL as a Data Source
 
  1. Download the PostgreSQL driver (jar file) from https://jdbc.postgresql.org/download.html
  2. Navigate to the `bin` folder of your Wildfly distribution (`cd ~/Downloads/wildfly-20.0.0.Final/bin/`)
  3. Start a JBoss CLI session by running the `./jboss-cli.sh -c` command (make sure the server is running)
  4. Register Postgres as a module and data source by executing the following three commands inside the CLI session:
     1. `module add --name=org.postgresql --resources=~/Downloads/postgresql-42.2.16.jar --dependencies=javax.api,javax.transaction.api`
-    2. `/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgresql",driver-class-name=org.postgresql.Driver)`
+    2. `/subsystem=datasources/jdbc-driver=postgres:add(driver-name="postgres",driver-module-name="org.postgresql",driver-class-name="org.postgresql.Driver")`
     3. `data-source add --jndi-name=java:jboss/datasources/PostgresDS --name=PostgresDS --connection-url=jdbc:postgresql://localhost:5432/postgres --driver-name=postgres --user-name=admin --password=password`
     4. Make note of the data source's JNDI name (`java:jboss/datasources/PostgresDS`), so you'll be able to reference it from your persistence unit and/or Java beans later on
     5. All of these settings can be found and edited inside the `standalone/configuration/standalone.xml` configuration file of your Wildfly distribution
