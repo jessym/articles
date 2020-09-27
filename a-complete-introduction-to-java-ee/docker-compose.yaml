@@ -4,6 +4,7 @@ services:
 
   postgres:
     image: 'postgres:12.1'
+    container_name: 'java_ee_postgres'
     environment:
       - 'POSTGRES_USER=admin'
       - 'POSTGRES_PASSWORD=password'

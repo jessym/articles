@@ -25,7 +25,10 @@ public class FlywayMigrationExecutor {
 
     @PostConstruct
     public void migrate() {
-        Flyway flyway = Flyway.configure().dataSource(dataSource).schemas("public").load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(dataSource)
+                .schemas("public")
+                .load();
         flyway.migrate();
     }
 

@@ -143,5 +143,6 @@ Recommended EJB Scopes (automatically part of Wildfly's container-wide transacti
  1. By default, all EJBs (defined by annotations like `@javax.ejb.Stateless` and `@javax.ejb.Singleton`) are automatically part of Wildfly's container-wide transaction management
  2. This means that all EJB operations (public methods) are executed in a transactional context, and, if an exception were to occur, will be _rolled back_
  3. So if an EJB successfully saves a new entity into the database and successfully publishes a message to some JMS broker, but later (in the same thread of execution) fails on a `NullPointerException`, both the database operation and the JMS publication will be rolled back
- 4. This does **not** automatically apply to CDI beans, defined by annotations like `@RequestScoped`, `@SessionScoped` and `@ApplicationScoped`
- 5. To enable transactional execution for CDI beans, the `@javax.transaction.Transactional` annotation should be explicitly set at a class or method level
+ 4. By default, transactional execution is only enabled for EJBs, and not for (ordinary) CDI beans
+ 5. To _disable_ transactional execution for an EJB, add the class-level `@TransactionManagement(TransactionManagementType.BEAN)` annotation
+ 6. To _enable_ transactional execution for CDI beans (defined by annotations like `@RequestScoped`, `@SessionScoped` and `@ApplicationScoped`), add the class or method-level `@javax.transaction.Transactional` annotation
